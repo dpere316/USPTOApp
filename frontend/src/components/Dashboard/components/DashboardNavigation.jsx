@@ -17,7 +17,7 @@ function dashboardnavigation(props) {
             </Link>
           </li>
 
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link className="nav-link" to="/Dashboard/AddUser">
               Add User 
             </Link>
@@ -27,7 +27,7 @@ function dashboardnavigation(props) {
             <Link className="nav-link" to="/Dashboard/AddPatent">
               Add Patent
             </Link>
-          </li>
+          </li> */}
 
         </ul>
         
