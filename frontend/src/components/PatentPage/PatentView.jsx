@@ -17,7 +17,8 @@ const PatentView = () => {
         const response = await fetch("/patents");
 
         const body = await response.json();
-
+        // body is an object with the response 
+        
         setPatents(
 
           // This sets the state of patents to be an object that contains only the documentID and Patent Corpus
