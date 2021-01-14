@@ -1,9 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const patentSchema = new Schema(
+  
   {
-    documentID: String,
+    
   },
+
   { collection: "Patents" }
 );
 
