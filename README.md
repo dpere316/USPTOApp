@@ -14,4 +14,4 @@ On the Terminal:
   * ```npm install```
 
 * cd /USPTOApp/backend
-  * ```npm start```
+  * ```npm install```
