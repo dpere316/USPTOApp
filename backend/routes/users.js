@@ -3,7 +3,18 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.send('User');
 });
+
+// Login Page
+router.get('/Login', function(req, res, next) {
+  res.send('Login');
+});
+
+// SignUp Page
+router.get('/Signup', function(req, res, next) {
+  res.send('Signup');
+});
+
 
 module.exports = router;
