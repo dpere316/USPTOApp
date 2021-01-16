@@ -16,5 +16,10 @@ router.get('/Signup', function(req, res, next) {
   res.send('Signup');
 });
 
+// Register Handle
+router.post('/register',function(req, res, next) {
+  console.log(req.body)
+  res.send('register');
+});
 
 module.exports = router;
