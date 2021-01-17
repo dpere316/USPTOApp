@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class signup extends Component {
+
+  handleSubmit = () => {
+
+  }
+
+  handleChange = () => {
+    
+  }
+  
   render() {
     return (
       <div className="d-flex justify-content-center ">
