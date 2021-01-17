@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -24,21 +23,18 @@ mongoose
   .catch((err) => console.error("Error connecting to mongo", err));
 
 const app_name = require("./package.json").name;
+
 const debug = require("debug")(
   `${app_name}:${path.basename(__filename).split(".")[0]}`
 );
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+
 app.use(logger('dev'));
 app.use(express.json());
 
 // BodyParser
 app.use(express.urlencoded({ extended: false }));
-
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // MiddleWare // Here is where we let our application use the route that has been created
 app.use('/', indexRouter);
