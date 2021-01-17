@@ -6,23 +6,14 @@ router.get("/", function (req, res, next) {
   res.send("User");
 });
 
-// Login Page
-router.get("/Login", function (req, res, next) {
-  res.send("Login");
-});
+// Login Handle
+router.post("/Login", function (req, res, next) {
 
-// SignUp Page
-router.get("/Signup", function (req, res, next) {
-  res.send("Signup");
-});
-
-// Register Handle
-router.post("/register", function (req, res, next) {
-  passport.authenticate("local-signup", function (error, user, info) {
+  // Passport callback
+  passport.authenticate("local-login", function (error, user, info) {
     if (error) {
       res.status(500).json({
-        message: "Oops something happened",
-        error: error.message || "Internal Server Error",
+        message: error || "Oops something happened",
       });
     }
     return res.json({
@@ -31,5 +22,25 @@ router.post("/register", function (req, res, next) {
     });
   })(req, res, next);
 });
+
+// Signup Handle
+router.post("/register", function (req, res, next) {
+
+  // Passport callback
+  passport.authenticate("local-signup", function (error, user, info) {
+    if (error) {
+      res.status(500).json({
+        message: error || "Oops something happened",
+      });
+    }
+    return res.json({
+      user,
+      message: "User is authenticated",
+    });
+  })(req, res, next);
+});
+
+
+
 
 module.exports = router;
