@@ -22,10 +22,10 @@ class App extends Component {
         <Navbar/>
         <Switch>
           <Route exact path="/" />
-          <Route exact path="/Patents" render={() => <ViewPatent/>}/> 
-          <Route exact path="/Dashboard" render={() => <DashBoard/>}/>
           <Route path="/Signup" component={SignUp} />
           <Route path="/Login" component={Login} />
+          <Route exact path="/Patents" render={() => <ViewPatent/>}/> 
+          <Route exact path="/Dashboard" render={() => <DashBoard/>}/>
           <Route path="/Dashboard/ViewUser" render={() => <ViewUser/>} />
         </Switch>
       </div>
