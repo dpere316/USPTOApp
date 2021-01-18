@@ -1,12 +1,10 @@
 const { Schema, model } = require("mongoose");
 
-const UserSchema = new moongoose.schema({
-    name: { type:String, required:True},
-    email: { type:String, required:True},
-    password: { type:String, required:True},
+const UserSchema = new Schema({
+    name: { type:String, required:true},
+    email: { type:String, required:true},
+    password: { type:String, required:true},
     date: { type:Date, Default:Date.now}
 })
 
-const User = moongoose.model('User',UserSchema);
-
-module.exports = User;
+module.exports = model("User",UserSchema);

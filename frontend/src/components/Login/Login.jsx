@@ -1,8 +1,19 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-class Login extends Component {
-  render() {
+const Login = () =>  {
+
+  const [email, setEmail, password, setPassword] = useState(""); 
+
+  const handleSubmit = () => {
+    
+  }
+
+  const handleChange = () => {
+    
+  }
+
+  
     return (
       <div className="d-flex justify-content-center ">
         <div className="login-box">
@@ -69,6 +80,6 @@ class Login extends Component {
       </div>
     );
   }
-}
+
 
 export default Login;
