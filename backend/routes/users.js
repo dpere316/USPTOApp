@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("../auth/passport/index");
+
+
 /* GET users listing. */
+
 router.get("/", function (req, res, next) {
   res.send("User");
 });
@@ -31,16 +34,22 @@ router.post("/register", function (req, res, next) {
     if (error) {
       res.status(500).json({
         message: error || "Oops something happened",
+        error:error.message || "Internal server error"
       });
     }
     return res.json({
       user,
-      message: "User is authenticated",
     });
   })(req, res, next);
 });
 
+router.get('/Login', function (req, res) {
+  res.render('login');
+});
 
+router.get('/signup', function (req, res) {
+  res.render('signup');
+});
 
 
 module.exports = router;

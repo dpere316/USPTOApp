@@ -1,7 +1,12 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
+import {useForm} from 'react-hook-form';
 
 const PatentForm = () => {
+
+  const { register, handleSubmit, errors } = useForm();
+
+  
   return (
     <div>
       <Form className="container mt-5" onSubmit={""}>

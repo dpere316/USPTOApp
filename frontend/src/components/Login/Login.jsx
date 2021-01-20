@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {useForm} from 'react-hook-form';
 
 const Login = () =>  {
 
-  const [email, setEmail, password, setPassword] = useState(""); 
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = () => {
-    
+  const onSubmit = (data) => {
+    console.log(data)
   }
-
-  const handleChange = () => {
-    
-  }
-
   
     return (
       <div className="d-flex justify-content-center ">
@@ -25,7 +22,7 @@ const Login = () =>  {
             <div className="card-body login-card-body">
               <p className="login-box-msg">Sign in to start your session</p>
               {/* <% include ./partials/messages %> */}
-              <form action="/users/login" method="POST">
+              <Form action="/users/login" method="POST" onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-group mb-3">
                   <input
                     type="email"
@@ -33,6 +30,7 @@ const Login = () =>  {
                     name="email"
                     className="form-control"
                     placeholder="Enter Email"
+                    ref={register}
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -47,6 +45,7 @@ const Login = () =>  {
                     name="password"
                     className="form-control"
                     placeholder="Enter Password"
+                    ref={register}
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -69,7 +68,7 @@ const Login = () =>  {
                   </div>
                   {/* /.col */}
                 </div>
-              </form>
+              </Form>
               <p className="mt-2">Don't have An Account?  <Link to="/signup" className="text-center">
                   SignUp
                 </Link></p>

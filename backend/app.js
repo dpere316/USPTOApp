@@ -17,7 +17,7 @@ const app = express();
 
 // Here we are connecting to our MongoDB database that is hosted on Compute1 at FIU
 mongoose
-  .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_URL || "mongodb://compute1.cognac.cs.fiu.edu:59122/PatentData?readPreference=secondary&ssl=false", { useNewUrlParser: true, useUnifiedTopology: true })
   .then((x) =>
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   )
@@ -58,8 +58,8 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+ res.status(err.status || 500);
+ res.json({ error: err })
 });
 
 module.exports = app;
