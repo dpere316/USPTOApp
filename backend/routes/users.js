@@ -43,13 +43,5 @@ router.post("/register", function (req, res, next) {
   })(req, res, next);
 });
 
-router.get('/Login', function (req, res) {
-  res.render('login');
-});
-
-router.get('/signup', function (req, res) {
-  res.render('signup');
-});
-
 
 module.exports = router;

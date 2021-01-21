@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // This is the model of the patents
-
 const Patent = require('../models/patent_model');
+
+// Import label model
+const Label = require('../models/label_model');
+const { response } = require('express');
 
 // This is the route to retrive the patents from the mongoDB database 
 
@@ -16,6 +19,23 @@ router.get('/', async function(req, res, next) {
     catch(err){
         res.json({message:err})
     }
+  });
+
+  router.post('/labels', async function(req, res, next) {
+
+    const label = new Label({
+      document: req.body.documentId,
+      MachineLearningPatent: req.body.MachineLearningPatent,
+      ActiveLearningPatent: req.body.ActiveLearningPatent,
+    })
+    label.save().then(result=> {
+      console.log(result);
+    })
+    .catch(error=> {
+      console.log(error);
+    })
+    res.status(201).json(label)
+
   });
 
 module.exports = router;

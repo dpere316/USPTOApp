@@ -6,12 +6,17 @@ import axios from 'axios';
 
 const Login = () =>  {
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm(); // initialize the hook
+
+  //register is a function to be used as a ref provided by the useForm hook. We can assign it to each input field so that the react-hook-form can track the changes for the input field value.
 
   const onSubmit = (data) => {
-   
+
+  // This is using axios to make a post request to our backend and sends {email,password}
+  // and checks if user is in our Database
+  
     axios({
-      url:"/users/Login",
+      url:"/users/Login", // route in backend
       method:"POST",
       data:{
         email: data.email,

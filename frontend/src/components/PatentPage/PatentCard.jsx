@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import Iframe from 'react-iframe';
 
-// This is a card component that is from bootstrap used to displat the patent via an IFrame
+// This is a card component that is from bootstrap used to display the patent via an IFrame
 
 const PatentCard = (props) => {
 

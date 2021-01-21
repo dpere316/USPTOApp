@@ -42,7 +42,7 @@ const PatentView = () => {
       </div>
 
       <div className="col">
-        <PatentForm/>
+        <PatentForm patents={patents}/>
       </div>
 
     </div>
