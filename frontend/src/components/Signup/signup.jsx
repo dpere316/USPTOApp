@@ -11,12 +11,14 @@ const Signup = () => {
 
   
   const onSubmit = (data) => {
-    // const email = data.email
+   
     axios({
       url:"/users/register",
       method:"POST",
       data:{
-        data
+        name: data.name,
+        email: data.email,
+        password: data.password
       }
     })
     .then(response=>{

@@ -11,7 +11,7 @@ const User = require("../../../models/User_model");
 
 const LoginStrategy = new Strategy({ passReqToCallback: true, usernameField: 'email' },
 
-  function (email, password, done) {
+  function (req,email, password, done) {
 
     User.findOne({email}).lean().exec((err, user) => {
 
@@ -31,6 +31,7 @@ const LoginStrategy = new Strategy({ passReqToCallback: true, usernameField: 'em
         return done(null,user);
 
     });
+   
   }
 );
 
