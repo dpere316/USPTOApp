@@ -1,19 +1,40 @@
-import React, { Component } from "react";
+// Form needs UI validation
+
+import React from "react";
 import { Link } from "react-router-dom";
+import {useForm} from 'react-hook-form';
+import axios from 'axios';
 
-class signup extends Component {
+const Signup = () => {
 
-  handleSubmit = () => {
+  const { register, handleSubmit} = useForm(); // initialize the hook 
 
+  //register is a function to be used as a ref provided by the useForm hook. We can assign it to each input field so that the react-hook-form can track the changes for the input field value.
+
+  const onSubmit = (data) => {
+   
+    // This is using axios to make a post request to our backend and send {name,email,password}
+    // and store it in mongoDB
+
+    axios({
+      url:"/users/register", // route in backend
+      method:"POST",
+      data:{
+        name: data.name,
+        email: data.email,
+        password: data.password
+      }
+    })
+    .then(response=>{
+      console.log("Data: ", response.data)
+    })
+    .catch(error => {
+      console.log("Error: ", error.data )
+    })
   }
 
-  handleChange = () => {
-    
-  }
-  
-  render() {
-    return (
-      <div className="d-flex justify-content-center ">
+  return (
+    <div className="d-flex justify-content-center ">
         <div className="login-box">
           <div className="login-logo">
             <b>SignUp</b>
@@ -22,7 +43,7 @@ class signup extends Component {
           <div className="card">
             <div className="card-body login-card-body">
               <p className="login-box-msg">Sign Up to start your session</p>
-              <form action="/users/signup" method="POST">
+              <form action="/users/signup" method="POST" onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-group mb-3">
                   <input
                     type="name"
@@ -30,7 +51,7 @@ class signup extends Component {
                     name="name"
                     className="form-control"
                     placeholder="Enter Name"
-                    // value="<%= typeof name != 'undefined' ? name : '' %>"
+                    ref={register({required: true})}
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -46,8 +67,9 @@ class signup extends Component {
                     name="email"
                     className="form-control"
                     placeholder="Enter Email"
-                    // value="<%= typeof email != 'undefined' ? email : '' %>"
+                    ref={register({required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/})}
                   />
+              
                   <div className="input-group-append">
                     <div className="input-group-text">
                       <span className="fas fa-envelope" />
@@ -61,7 +83,7 @@ class signup extends Component {
                     name="password"
                     className="form-control"
                     placeholder="Create Password"
-                    // value="<%= typeof password != 'undefined' ? password : '' %>"
+                    ref={register({required: true})}
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -76,7 +98,6 @@ class signup extends Component {
                     name="password2"
                     className="form-control"
                     placeholder="Confirm Password"
-                    // value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -103,9 +124,8 @@ class signup extends Component {
           </div>
         </div>
       </div>
-    );
-  }
-}
+  );
+};
 
-export default signup;
+export default Signup;
 

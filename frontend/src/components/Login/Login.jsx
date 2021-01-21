@@ -1,18 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {useForm} from 'react-hook-form';
+import axios from 'axios';
 
 const Login = () =>  {
 
-  const [email, setEmail, password, setPassword] = useState(""); 
+  const { register, handleSubmit } = useForm(); // initialize the hook
 
-  const handleSubmit = () => {
-    
+  //register is a function to be used as a ref provided by the useForm hook. We can assign it to each input field so that the react-hook-form can track the changes for the input field value.
+
+  const onSubmit = (data) => {
+
+  // This is using axios to make a post request to our backend and sends {email,password}
+  // and checks if user is in our Database
+  
+    axios({
+      url:"/users/Login", // route in backend
+      method:"POST",
+      data:{
+        email: data.email,
+        password: data.password
+      }
+    })
+    .then(response=>{
+      console.log("Data: ", response.data)
+    })
+    .catch(error => {
+      console.log("Error: ", error.data )
+    })
   }
-
-  const handleChange = () => {
-    
-  }
-
+  
     return (
       <div className="d-flex justify-content-center ">
         <div className="login-box">
@@ -24,7 +42,7 @@ const Login = () =>  {
             <div className="card-body login-card-body">
               <p className="login-box-msg">Sign in to start your session</p>
               {/* <% include ./partials/messages %> */}
-              <form action="/users/login" method="POST">
+              <Form action="/users/login" method="POST" onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-group mb-3">
                   <input
                     type="email"
@@ -32,6 +50,7 @@ const Login = () =>  {
                     name="email"
                     className="form-control"
                     placeholder="Enter Email"
+                    ref={register}
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -46,6 +65,7 @@ const Login = () =>  {
                     name="password"
                     className="form-control"
                     placeholder="Enter Password"
+                    ref={register}
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -68,7 +88,7 @@ const Login = () =>  {
                   </div>
                   {/* /.col */}
                 </div>
-              </form>
+              </Form>
               <p className="mt-2">Don't have An Account?  <Link to="/signup" className="text-center">
                   SignUp
                 </Link></p>

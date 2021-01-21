@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link} from "react-router-dom";
 
-
-class navBar extends Component {
-
-  render(){
-    return (      
+const navBar = () => {
+  
+  return (
+    <div>
       <Navbar bg="primary" expand="lg" variant="dark">
         <Navbar.Brand href="/">
           Patent App
@@ -23,9 +22,9 @@ class navBar extends Component {
         </Nav>
         </Navbar.Collapse>
       </Navbar>
-    );
-  }
-}
-
+    </div>
+  );
+};
 
 export default navBar;
+
