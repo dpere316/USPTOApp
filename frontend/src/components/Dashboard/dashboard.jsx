@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Nav from './components/DashboardNavigation';
 import Chart from './components/Chart';
 
 
-class dashboard extends Component {
-    render() {
-        return (
-            <div>
+const Dashboard = (props) => {
+
+
+    return (
+        <div>
+        <h1>{props.loggedInStatus}</h1>
                 <Nav/>
                 <Chart/>
-            </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
-export default dashboard;
+
+
+export default Dashboard;

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
-const Signup = () => {
+const Signup = (props) => {
 
   const { register, handleSubmit} = useForm(); // initialize the hook 
 
@@ -26,7 +26,7 @@ const Signup = () => {
       }
     })
     .then(response=>{
-      console.log("Data: ", response.data)
+      props.history.push("/Dashboard");
     })
     .catch(error => {
       console.log("Error: ", error.data )
@@ -67,6 +67,7 @@ const Signup = () => {
                     name="email"
                     className="form-control"
                     placeholder="Enter Email"
+                    autoComplete="username"
                     ref={register({required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/})}
                   />
               
@@ -83,6 +84,7 @@ const Signup = () => {
                     name="password"
                     className="form-control"
                     placeholder="Create Password"
+                    autoComplete="false"
                     ref={register({required: true})}
                   />
                   <div className="input-group-append">
@@ -97,6 +99,7 @@ const Signup = () => {
                     id="password2"
                     name="password2"
                     className="form-control"
+                    autoComplete="false"
                     placeholder="Confirm Password"
                   />
                   <div className="input-group-append">

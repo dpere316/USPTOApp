@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
-const Login = () =>  {
+const Login = (props) =>  {
 
   const { register, handleSubmit } = useForm(); // initialize the hook
 
   //register is a function to be used as a ref provided by the useForm hook. We can assign it to each input field so that the react-hook-form can track the changes for the input field value.
 
   const onSubmit = (data) => {
-
   // This is using axios to make a post request to our backend and sends {email,password}
   // and checks if user is in our Database
   
@@ -24,13 +23,18 @@ const Login = () =>  {
       }
     })
     .then(response=>{
-      console.log("Data: ", response.data)
+
+      if(response.status === 200)
+      {
+        props.history.push("/Dashboard");
+      }
+
     })
     .catch(error => {
-      console.log("Error: ", error.data )
+      console.log("Error", error);
     })
   }
-  
+ 
     return (
       <div className="d-flex justify-content-center ">
         <div className="login-box">
@@ -50,6 +54,7 @@ const Login = () =>  {
                     name="email"
                     className="form-control"
                     placeholder="Enter Email"
+                    autoComplete="username"
                     ref={register}
                   />
                   <div className="input-group-append">
@@ -65,6 +70,7 @@ const Login = () =>  {
                     name="password"
                     className="form-control"
                     placeholder="Enter Password"
+                    autoComplete="false"
                     ref={register}
                   />
                   <div className="input-group-append">
@@ -100,5 +106,6 @@ const Login = () =>  {
     );
   }
 
+  
 
 export default Login;
