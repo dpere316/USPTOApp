@@ -14,15 +14,15 @@ router.post("/Login", function (req, res, next) {
 
   // Passport callback
   passport.authenticate("local-login", function (error, user, info) {
+
     if (error) {
       res.status(500).json({
         message: error || "Oops something happened",
+        error: error.message || "Internal server error"
       });
     }
-    return res.json({
-      user,
-      message: "User is authenticated",
-    });
+    return res.json(user);
+
   })(req, res, next);
 });
 
@@ -34,12 +34,10 @@ router.post("/register", function (req, res, next) {
     if (error) {
       res.status(500).json({
         message: error || "Oops something happened",
-        error:error.message || "Internal server error"
       });
     }
-    return res.json({
-      user,
-    });
+    return res.json(user);
+    
   })(req, res, next);
 });
 

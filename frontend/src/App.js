@@ -1,5 +1,5 @@
 // Import Helpers
-import React, { Component } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 // Imports of Components here
@@ -13,25 +13,28 @@ import ViewUser from './components/Dashboard/Pages/viewUser';
 // Import Styles
 import './App.css';
 
-class App extends Component {
+
+const App = () => {
 
 
-  render(){
-    return (
-      <div>
+
+  
+  return (
+    <div>
         <Navbar/>
         <Switch>
           <Route exact path="/" />
           <Route path="/Signup" component={SignUp} />
           <Route path="/Login" component={Login} />
           <Route exact path="/Patents" render={() => <ViewPatent/>}/> 
-          <Route exact path="/Dashboard" render={() => <DashBoard/>}/>
+          <Route exact path="/Dashboard" render={props => (
+            <DashBoard {...props}/>
+          )}/>
           <Route path="/Dashboard/ViewUser" render={() => <ViewUser/>} />
         </Switch>
       </div>
-    );
-  }
-}
+  );
+};
 
 export default App;
 
