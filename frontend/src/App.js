@@ -16,9 +16,6 @@ import './App.css';
 
 const App = () => {
 
-
-
-  
   return (
     <div>
         <Navbar/>
@@ -27,9 +24,7 @@ const App = () => {
           <Route path="/Signup" component={SignUp} />
           <Route path="/Login" component={Login} />
           <Route exact path="/Patents" render={() => <ViewPatent/>}/> 
-          <Route exact path="/Dashboard" render={props => (
-            <DashBoard {...props}/>
-          )}/>
+          <Route exact path="/Dashboard" render={props => (<DashBoard {...props}/>)}/>
           <Route path="/Dashboard/ViewUser" render={() => <ViewUser/>} />
         </Switch>
       </div>
