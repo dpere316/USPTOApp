@@ -21,6 +21,17 @@ router.post("/Login", function (req, res, next) {
         error: error.message || "Internal server error"
       });
     }
+    // Adds a property to object and lets us know that the user has been authenticated.
+    user.isAuthenticated = true; 
+
+    // Persistent Login
+    req.logIn(user, function(error){
+      if(error) {
+        return res.status(500).json({
+          message: error || "Oops something happend"
+        })
+      }
+    });
     return res.json(user);
 
   })(req, res, next);
@@ -36,6 +47,19 @@ router.post("/register", function (req, res, next) {
         message: error || "Oops something happened",
       });
     }
+
+    // Persistent Login
+    req.logIn(user, function(error){
+      if(error) {
+        return res.status(500).json({
+          message: error || "Oops something happend"
+        })
+      }
+    });
+
+    // Adds a property to object and lets us know that the user has been authenticated.
+    user.isAuthenticated = true; 
+
     return res.json(user);
     
   })(req, res, next);

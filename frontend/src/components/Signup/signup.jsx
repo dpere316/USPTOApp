@@ -27,6 +27,7 @@ const Signup = (props) => {
     })
     .then(response=>{
       props.history.push("/Dashboard");
+      console.log(response.data);
     })
     .catch(error => {
       console.log("Error: ", error.data )

@@ -3,9 +3,11 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('./auth/passport/index');
+
+// Simple cookie-based session middleware.
+const cookieSession = require('cookie-session');
 
 // Routes
 const indexRouter = require('./routes/index');
@@ -35,17 +37,21 @@ app.use(express.json());
 
 // BodyParser
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+// This module stores the session data on the client within a cookie
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // MiddleWare // Here is where we let our application use the route that has been created
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/patents', patentsRouter);
-
-
-// Passport
-app.use(passport.initialize());
-// app.use(passport.session());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
