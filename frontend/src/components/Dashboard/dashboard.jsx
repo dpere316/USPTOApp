@@ -4,12 +4,19 @@ import Chart from './components/Chart';
 
 
 const Dashboard = (props) => {
-    return (
-        <div>
-                <Nav/>
-                <Chart/>
-        </div>
-    );
+
+    
+
+        return (
+        
+            <div>
+            
+                    <Nav/>
+                    <Chart/>
+            </div>
+        );
+    
+   
 };
 
 

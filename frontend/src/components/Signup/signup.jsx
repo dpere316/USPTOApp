@@ -1,41 +1,52 @@
 // Form needs UI validation
 
 import React from "react";
-import { Link } from "react-router-dom";
-import {useForm} from 'react-hook-form';
-import axios from 'axios';
+import { Link, Redirect } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Signup = (props) => {
-
-  const { register, handleSubmit} = useForm(); // initialize the hook 
+  const { register, handleSubmit } = useForm(); // initialize the hook
 
   //register is a function to be used as a ref provided by the useForm hook. We can assign it to each input field so that the react-hook-form can track the changes for the input field value.
 
   const onSubmit = (data) => {
-   
     // This is using axios to make a post request to our backend and send {name,email,password}
     // and store it in mongoDB
 
     axios({
-      url:"/users/register", // route in backend
-      method:"POST",
-      data:{
+      url: "/users/register", // route in backend
+      method: "POST",
+      data: {
         name: data.name,
         email: data.email,
-        password: data.password
-      }
+        password: data.password,
+      },
     })
-    .then(response=>{
-      props.history.push("/Dashboard");
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.log("Error: ", error.data )
-    })
-  }
+      .then((response) => {
+        if (response.status === 200) {
+          const ISAUTHENTICATED = response.data.isAuthenticated;
+          window.localStorage.setItem("isAuthenticated", ISAUTHENTICATED);
+          props.history.push("/Login");
+          console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error: ", error.data);
+      });
+  };
+  const isAuthedRedirect = () => {
+    const ISAUTHENTICATED = window.localStorage.getItem("isAuthenticated");
+
+    if (ISAUTHENTICATED) {
+      return <Redirect to="/Dashboard" />;
+    }
+  };
 
   return (
-    <div className="d-flex justify-content-center ">
+    <div>
+      {isAuthedRedirect()} ?
+      <div className="d-flex justify-content-center ">
         <div className="login-box">
           <div className="login-logo">
             <b>SignUp</b>
@@ -44,7 +55,11 @@ const Signup = (props) => {
           <div className="card">
             <div className="card-body login-card-body">
               <p className="login-box-msg">Sign Up to start your session</p>
-              <form action="/users/signup" method="POST" onSubmit={handleSubmit(onSubmit)}>
+              <form
+                action="/users/signup"
+                method="POST"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div className="input-group mb-3">
                   <input
                     type="name"
@@ -52,7 +67,7 @@ const Signup = (props) => {
                     name="name"
                     className="form-control"
                     placeholder="Enter Name"
-                    ref={register({required: true})}
+                    ref={register({ required: true })}
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -69,9 +84,12 @@ const Signup = (props) => {
                     className="form-control"
                     placeholder="Enter Email"
                     autoComplete="username"
-                    ref={register({required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/})}
+                    ref={register({
+                      required: true,
+                      pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                    })}
                   />
-              
+
                   <div className="input-group-append">
                     <div className="input-group-text">
                       <span className="fas fa-envelope" />
@@ -86,7 +104,7 @@ const Signup = (props) => {
                     className="form-control"
                     placeholder="Create Password"
                     autoComplete="false"
-                    ref={register({required: true})}
+                    ref={register({ required: true })}
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -115,9 +133,12 @@ const Signup = (props) => {
                     <button type="submit" className="btn btn-primary btn-block">
                       Sign Up
                     </button>
-                    <p className="lead mt-4">Have An Account?  <Link to="/login" className="text-center">
-                  Login
-                </Link></p>
+                    <p className="lead mt-4">
+                      Have An Account?{" "}
+                      <Link to="/login" className="text-center">
+                        Login
+                      </Link>
+                    </p>
                   </div>
                   {/* /.col */}
                 </div>
@@ -128,8 +149,8 @@ const Signup = (props) => {
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
 export default Signup;
-
