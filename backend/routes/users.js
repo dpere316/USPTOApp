@@ -52,17 +52,19 @@ router.post("/register", function (req, res, next) {
       });
     }
 
-    // // Persistent Login
-    // req.logIn(user, function(error){
-    //   if(error) {
-    //     return res.status(500).json({
-    //       message: error || "Oops something happend"
-    //     })
-    //   }
-      
-      return res.json(user);
+  //  // Persistent Login
+  //  req.logIn(user, function(error){
+  //   if(error) {
+  //     return res.status(500).json({
+  //       message: error || "Oops something happend"
+  //     })
+  //   }
+  //   // Adds a property to object and lets us know that the user has been authenticated.
+  //   user.isAuthenticated = true; 
 
-    // });
+    return res.json(user);
+
+  // });
 
     
   })(req, res, next);

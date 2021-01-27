@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 const Login = (props) => {
-  
   const { register, handleSubmit } = useForm(); // initialize the hook
 
   //register is a function to be used as a ref provided by the useForm hook. We can assign it to each input field so that the react-hook-form can track the changes for the input field value.
@@ -25,11 +24,13 @@ const Login = (props) => {
       .then((response) => {
         if (response.status === 200) {
           const ISAUTHENTICATED = response.data.isAuthenticated;
+          console.log(response.data.isAuthenticated)
           window.localStorage.setItem("isAuthenticated", ISAUTHENTICATED);
-          props.history.push("/Dashboard");
+          // props.history.push("/Dashboard");
+          window.location.reload(false);
           console.log(response.data);
           // Triggers a refresh need to find a better way to change login and logout
-          window.location.reload(false);
+         
         }
       })
       .catch((error) => {
@@ -39,10 +40,10 @@ const Login = (props) => {
 
   // This function checks localstorage to see if the user is already logged in and then redirects them if they try to relogin
   const isAuthedRedirect = () => {
-
     const ISAUTHENTICATED = window.localStorage.getItem("isAuthenticated");
 
     if (ISAUTHENTICATED) {
+       
       return <Redirect to="/Dashboard" />;
     }
   };

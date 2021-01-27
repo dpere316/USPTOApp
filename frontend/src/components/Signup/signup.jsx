@@ -27,8 +27,9 @@ const Signup = (props) => {
         if (response.status === 200) {
           const ISAUTHENTICATED = response.data.isAuthenticated;
           window.localStorage.setItem("isAuthenticated", ISAUTHENTICATED);
-          props.history.push("/Login");
+          // props.history.push("/Login");
           console.log(response.data);
+          // window.location.reload(false);
         }
       })
       .catch((error) => {
@@ -39,7 +40,7 @@ const Signup = (props) => {
     const ISAUTHENTICATED = window.localStorage.getItem("isAuthenticated");
 
     if (ISAUTHENTICATED) {
-      return <Redirect to="/Dashboard" />;
+      return <Redirect to="/Login" />;
     }
   };
 

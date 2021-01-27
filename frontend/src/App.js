@@ -1,5 +1,5 @@
 // Import Helpers
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from "react-router-dom";
 
 // Imports of Components here
@@ -10,24 +10,29 @@ import SignUp from './components/Signup/signup';
 import Login from './components/Login/Login';
 import ViewUser from './components/Dashboard/Pages/viewUser';
 import Logout from './components/Logout/Logout';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+
 // Import Styles
 import './App.css';
 
 
 const App = () => {
   
-  const ISAUTHENTICATED = window.localStorage.getItem("isAuthenticated");
+  // Set this into state using react hooks
+  const [Auth] = useState(window.localStorage.getItem("isAuthenticated"))
+  
+  // const ISAUTHENTICATED = window.localStorage.getItem("isAuthenticated");
 
   return (
     <div>
-        <Navbar isAuthed = {ISAUTHENTICATED}/>
+        <Navbar isAuthed = {Auth}/>
         <Switch>
           <Route exact path="/" />
-          <Route path="/Signup" component={SignUp} />
-          <Route path="/Login" component={Login} />
-          <Route exact path="/Patents" render={() => <ViewPatent />}/> 
-          <Route exact path="/Logout" component = {Logout} />
-          <Route exact path="/Dashboard" render={props => (<DashBoard  {...props}/>)}/>
+          <Route path="/Signup" render={(props) => <SignUp {...props} />} />
+          <Route path="/Login" render={(props) => <Login {...props} />} />
+          <ProtectedRoute exact path="/Patents"   isAuthed = {Auth} component = {ViewPatent}/> 
+          <Route exact path="/Logout" render={(props) => <Logout {...props} />} />
+          <ProtectedRoute exact path='/dashboard' isAuthed = {Auth} component={DashBoard} />
           <Route path="/Dashboard/ViewUser" render={() => <ViewUser />} />
         </Switch>
       </div>
