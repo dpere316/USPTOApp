@@ -24,13 +24,13 @@ const Login = (props) => {
       .then((response) => {
         if (response.status === 200) {
           const ISAUTHENTICATED = response.data.isAuthenticated;
-          console.log(response.data.isAuthenticated)
+
           window.localStorage.setItem("isAuthenticated", ISAUTHENTICATED);
-          // props.history.push("/Dashboard");
-          window.location.reload(false);
-          console.log(response.data);
+
           // Triggers a refresh need to find a better way to change login and logout
-         
+          window.location.reload(false);
+
+          // console.log(response.data);
         }
       })
       .catch((error) => {
@@ -43,14 +43,13 @@ const Login = (props) => {
     const ISAUTHENTICATED = window.localStorage.getItem("isAuthenticated");
 
     if (ISAUTHENTICATED) {
-       
       return <Redirect to="/Dashboard" />;
     }
   };
 
   return (
     <div>
-      {isAuthedRedirect()} ?
+      {isAuthedRedirect()}
       <div className="d-flex justify-content-center ">
         <div className="login-box">
           <div className="login-logo">
