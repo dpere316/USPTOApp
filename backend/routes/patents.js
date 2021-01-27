@@ -19,6 +19,7 @@ router.get("/", async function (req, res, next) {
 });
 
 // This route is sending a post to the DB with labeling information aswell as document id
+// Need to send userid
 
 router.post("/labels", async function (req, res, next) {
   const label = new Label({

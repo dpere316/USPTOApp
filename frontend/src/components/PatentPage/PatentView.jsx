@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import PatentCard from "../PatentPage/PatentCard";
 import PatentForm from "../PatentPage/PatentForm";
 
-const PatentView = () => {
+
+const PatentView = (props) => {
 
   // Patents is an object that contains the documentID and the Patent Corpus
   // SetPatents is used to set the state for patents
@@ -33,7 +34,7 @@ const PatentView = () => {
 
     fetchData();
   }, []);
-
+  
   return (
     <div className="row">
     
@@ -47,6 +48,7 @@ const PatentView = () => {
 
     </div>
   );
+  
 };
 
 export default PatentView;
