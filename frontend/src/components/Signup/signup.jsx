@@ -29,7 +29,7 @@ const Signup = (props) => {
           window.localStorage.setItem("isAuthenticated", ISAUTHENTICATED);
           // props.history.push("/Login");
           console.log(response.data);
-          // window.location.reload(false);
+          window.location.reload(false);
         }
       })
       .catch((error) => {
