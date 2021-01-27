@@ -25,28 +25,26 @@ const Signup = (props) => {
     })
       .then((response) => {
         if (response.status === 200) {
-          const ISAUTHENTICATED = response.data.isAuthenticated;
-          window.localStorage.setItem("isAuthenticated", ISAUTHENTICATED);
-          // props.history.push("/Login");
-          console.log(response.data);
-          // window.location.reload(false);
+         props.history.push('/login')
         }
       })
       .catch((error) => {
         console.log("Error: ", error.data);
       });
   };
+
+  // This function checks localstorage to see if the user is already logged in and then redirects them if they try to relogin
   const isAuthedRedirect = () => {
     const ISAUTHENTICATED = window.localStorage.getItem("isAuthenticated");
 
     if (ISAUTHENTICATED) {
-      return <Redirect to="/Login" />;
+      return <Redirect to= "/Dashboard" />;
     }
   };
 
   return (
     <div>
-      {isAuthedRedirect()} ?
+      {isAuthedRedirect()} 
       <div className="d-flex justify-content-center ">
         <div className="login-box">
           <div className="login-logo">

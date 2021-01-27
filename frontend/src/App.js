@@ -30,10 +30,10 @@ const App = () => {
           <Route exact path="/" />
           <Route path="/Signup" render={(props) => <SignUp {...props} />} />
           <Route path="/Login" render={(props) => <Login {...props} />} />
-          <ProtectedRoute exact path="/Patents"   isAuthed = {Auth} component = {ViewPatent}/> 
           <Route exact path="/Logout" render={(props) => <Logout {...props} />} />
+          <ProtectedRoute exact path="/Patents"   isAuthed = {Auth} component = {ViewPatent}/> 
           <ProtectedRoute exact path='/dashboard' isAuthed = {Auth} component={DashBoard} />
-          <Route path="/Dashboard/ViewUser" render={() => <ViewUser />} />
+          <ProtectedRoute exact path="/Dashboard/ViewUser" isAuthed = {Auth} component={ViewUser} />
         </Switch>
       </div>
   );
