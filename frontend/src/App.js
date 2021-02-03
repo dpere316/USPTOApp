@@ -11,6 +11,7 @@ import Login from './components/Login/Login';
 import ViewUser from './components/Dashboard/Pages/viewUser';
 import Logout from './components/Logout/Logout';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Home from './components/Home/Home';
 
 // Import Styles
 import './App.css';
@@ -28,6 +29,7 @@ const App = () => {
         <Navbar isAuthed = {Auth}/>
         <Switch>
           <Route exact path="/" />
+          <Route path="/Home" render={(props) => <Home {...props} />} />
           <Route path="/Signup" render={(props) => <SignUp {...props} />} />
           <Route path="/Login" render={(props) => <Login {...props} />} />
           <Route exact path="/Logout" render={(props) => <Logout {...props} />} />
