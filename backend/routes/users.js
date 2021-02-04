@@ -5,8 +5,8 @@ const passport = require("../auth/passport/index");
 
 /* GET users listing. */
 
-router.get("/", function (req, res, next) {
-  res.send("User");
+router.get("/getuser", function (req, res, next) {
+  
 });
 
 // Login Handle
