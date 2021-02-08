@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/Login" render={(props) => <Login {...props} />} />
           <Route exact path="/Logout" render={(props) => <Logout {...props} />} />
           <ProtectedRoute exact path="/Patents"   isAuthed = {Auth} component = {ViewPatent}/> 
-          <ProtectedRoute exact path='/dashboard' isAuthed = {Auth} component={DashBoard} />
+          <ProtectedRoute exact path='/dashboard' isAuthed = {Auth} component= {DashBoard} />
           <ProtectedRoute exact path="/Dashboard/ViewUser" isAuthed = {Auth} component={ViewUser} />
         </Switch>
       </div>

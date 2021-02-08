@@ -10,7 +10,6 @@ const passport = require('./auth/passport/index');
 const cookieSession = require('cookie-session');
 
 // Routes
-const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const patentsRouter = require('./routes/patents');
 
@@ -19,7 +18,7 @@ const app = express();
 
 // Here we are connecting to our MongoDB database that is hosted on Compute1 at FIU
 mongoose
-  .connect(process.env.MONGO_URL || "mongodb://compute1.cognac.cs.fiu.edu:59122/PatentData?readPreference=secondary&ssl=false", { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((x) =>
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   )
@@ -49,7 +48,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // MiddleWare // Here is where we let our application use the route that has been created
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/patents', patentsRouter);
 
