@@ -2420,24 +2420,46 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+@font-face {
+  font-family: titleFont;
+  src: url(./segoesc.ttf);
+}
+
 .home-background {
   background-image: url("./components/Home/25372_Converted22.png"); /* The image used */
   background-color: #ffffff; /* Used if the image is unavailable */
-  height: 920px; /* You must set a specified height */
+  height: 700px; /* You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; 
+  background-size: cover;   
 }
-
-.home-page-title {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 40px;
-  font-weight: lighter;
+.home-page-description {
+  font-size: 35px;
+  font-weight: normal;
   text-align: center;
   color:#000;
   padding:0px;
-  line-height: 500px;
   display: block;
+}
+.welcome-text{
+  margin: 0%;
+  padding: 0px;
+  text-align: center;
+}
+
+.home-page-title {
+  font-family: titleFont;
+  font-size: 70px;
+  font-weight: bold;
+  text-align: center;
+  color:#000;
+  padding:0px;
+  margin: 0%;
+  display: block;
+}
+
+.home-links {
+  text-align: center;
 }
 .btn-primary {
   color: #fff;

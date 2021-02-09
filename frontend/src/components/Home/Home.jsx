@@ -1,20 +1,32 @@
 import React from "react";
-
+import { Link, Redirect } from "react-router-dom";
 import "../../App.css"
 
 
 const Home = (props) => {
 
   return (
-    <body>    
-      
-    <div className = "home-background" >
-      <div className = "home-page-title">
-        Patentify
+    <html>
+      <body>    
+      <div className = "home-background">
+        <div className = "welcome-text">
+          <p className = "home-page-description"> Welcome to</p>
+          <p className = "home-page-title">Patentify</p>
+          <p className = "home-page-description">AI assisted patent labeling</p>
+        </div>
+        <div className = "home-links">
+        <Link to="/login">
+          Login     
+        </Link>
+        <Link to="/signup">
+          SignUp
+        </Link>
       </div>
-    </div>
-    
-    </body>
+      </div>
+
+
+      </body>
+    </html>
 
     
   );
