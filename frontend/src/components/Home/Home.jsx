@@ -10,7 +10,7 @@ const Home = (props) => {
       
     <div className = "home-background" >
       <div className = "home-page-title">
-      Patentify
+        Patentify
       </div>
     </div>
     
