@@ -2427,19 +2427,17 @@ fieldset:disabled a.btn {
 
 .home-background {
   background-image: url("./components/Home/25372_Converted22.png"); /* The image used */
-  background-color: #ffffff; /* Used if the image is unavailable */
-  height: 700px; /* You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover;   
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  color: #f5f5f5; 
 }
 .home-page-description {
   font-size: 35px;
   font-weight: normal;
   text-align: center;
   color:#000;
-  padding:0px;
-  display: block;
+  line-height: 0px;
 }
 .welcome-text{
   margin: 0%;
@@ -2448,14 +2446,12 @@ fieldset:disabled a.btn {
 }
 
 .home-page-title {
+  line-height: 70px;
   font-family: titleFont;
   font-size: 70px;
   font-weight: bold;
   text-align: center;
   color:#000;
-  padding:0px;
-  margin: 0%;
-  display: block;
 }
 
 .home-links {

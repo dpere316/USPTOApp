@@ -28,7 +28,7 @@ const App = () => {
     <div>
         <Navbar isAuthed = {Auth}/>
         <Switch>
-          <Route exact path="/" />
+          <Route exact path="/" render={(props) => <Home {...props} />} />
           <Route path="/Home" render={(props) => <Home {...props} />} />
           <Route path="/Signup" render={(props) => <SignUp {...props} />} />
           <Route path="/Login" render={(props) => <Login {...props} />} />
