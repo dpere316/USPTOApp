@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Switch, Route } from "react-router-dom";
 
 // Imports of Components here
+import Home from './components/Home/Home';
 import Navbar from './components/NavigationBar/navBar';
 import ViewPatent from './components/PatentPage/PatentView';
 import DashBoard from './components/Dashboard/dashboard';
@@ -27,7 +28,7 @@ const App = () => {
     <div>
         <Navbar isAuthed = {Auth}/>
         <Switch>
-          <Route exact path="/" />
+          <Route exact path="/" render ={Home}/>
           <Route path="/Signup" render={(props) => <SignUp {...props} />} />
           <Route path="/Login" render={(props) => <Login {...props} />} />
           <Route exact path="/Logout" render={(props) => <Logout {...props} />} />
