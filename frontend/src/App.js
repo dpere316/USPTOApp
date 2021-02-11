@@ -1,6 +1,6 @@
 // Import Helpers
 import React, { useState } from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route,Redirect } from "react-router-dom";
 
 // Imports of Components here
 import Home from './components/Home/Home';
@@ -28,7 +28,8 @@ const App = () => {
     <div>
         <Navbar isAuthed = {Auth}/>
         <Switch>
-          <Route exact path="/" render ={Home}/>
+          <Redirect exact from="/" to="/Home" />
+          <Route exact path="/Home" render ={Home}/>
           <Route path="/Signup" render={(props) => <SignUp {...props} />} />
           <Route path="/Login" render={(props) => <Login {...props} />} />
           <Route exact path="/Logout" render={(props) => <Logout {...props} />} />
