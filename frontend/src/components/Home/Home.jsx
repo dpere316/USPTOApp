@@ -10,26 +10,18 @@ const Home = (props) => {
     <html>
       <body>    
       <div className = "home-background">
-        <br>
-        
 
-
-
-
-        
-        </br>
         <div className = "welcome-text">
           <p className = "home-page-description"> Welcome to</p>
           <p className = "home-page-title">Patentify</p>
           <p className = "home-page-description">AI assisted patent labeling</p>
         </div>
         <div className = "home-links">
-          <br>
-          </br>
-        <Link to="/login" className="btn btn-primary">
+        
+        <Link to="/login" className="btn-home btn-primary">
           Login     
         </Link>
-        <Link to="/signup" className = "btn btn-primary">
+        <Link to="/signup" className = "btn-home btn-primary">
           SignUp
         </Link>
         </div>
