@@ -72,6 +72,7 @@ const Login = (props) => {
                     placeholder="Enter Email"
                     autoComplete="username"
                     ref={register({ required: true })}
+                    required
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -88,6 +89,7 @@ const Login = (props) => {
                     placeholder="Enter Password"
                     autoComplete="false"
                     ref={register({ required: "Password Required" })}
+                    required
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">

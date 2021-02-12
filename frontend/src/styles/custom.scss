@@ -13,6 +13,17 @@ $spacers:(
     height:"100%"
 }
 
+@font-face {
+    font-family:'Segoe UI Script';
+    src: url('./Fonts/segoesc.ttf');
+    font-style: normal;
+    font-weight: 100;
+}
+
+.Hero {
+    font-family: 'Segoe UI Script';
+    font-size: clamp(60px,2vw,2em)
+}
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 

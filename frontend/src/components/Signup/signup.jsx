@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 const Signup = (props) => {
-  const { register, handleSubmit } = useForm(); // initialize the hook
+
+  const { register, handleSubmit} = useForm(); // initialize the hook
 
   //register is a function to be used as a ref provided by the useForm hook. We can assign it to each input field so that the react-hook-form can track the changes for the input field value.
 
@@ -42,6 +43,8 @@ const Signup = (props) => {
     }
   };
 
+  
+
   return (
     <div>
       {isAuthedRedirect()} 
@@ -67,6 +70,7 @@ const Signup = (props) => {
                     className="form-control"
                     placeholder="Enter Name"
                     ref={register({ required: true })}
+                    required
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -87,8 +91,8 @@ const Signup = (props) => {
                       required: true,
                       pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
                     })}
+                    required
                   />
-
                   <div className="input-group-append">
                     <div className="input-group-text">
                       <span className="fas fa-envelope" />
@@ -100,10 +104,11 @@ const Signup = (props) => {
                     type="password"
                     id="password"
                     name="password"
-                    className="form-control"
+                    className="form-control pd-password-validation"
                     placeholder="Create Password"
                     autoComplete="false"
-                    ref={register({ required: true })}
+                    ref={register({ required: true})}
+                    required
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -111,7 +116,7 @@ const Signup = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="input-group mb-3">
+                {/* <div className="input-group mb-3">
                   <input
                     type="password"
                     id="password2"
@@ -119,13 +124,14 @@ const Signup = (props) => {
                     className="form-control"
                     autoComplete="false"
                     placeholder="Confirm Password"
+                    required
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
                       <span className="fas fa-lock" />
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="row">
                   {/* /.col */}
                   <div className="col">
