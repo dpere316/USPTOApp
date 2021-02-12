@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "../../App.css"
 
 
@@ -8,10 +8,8 @@ const Home = (props) => {
 
   return (
     <html>
-      <body>    
-      <div className = "home-background">
-
-        <div className = "welcome-text">
+      <body className = "home-background" >    
+        <div className = "welcome-text" >
           <p className = "home-page-description"> Welcome to</p>
           <p className = "home-page-title">Patentify</p>
           <p className = "home-page-description">AI assisted patent labeling</p>
@@ -25,9 +23,6 @@ const Home = (props) => {
           SignUp
         </Link>
         </div>
-      </div>
-
-
       </body>
     </html>
 
