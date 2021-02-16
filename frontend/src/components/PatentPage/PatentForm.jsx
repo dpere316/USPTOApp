@@ -16,7 +16,13 @@ const PatentForm = (props) => {
       data:{
         documentId:props.patents[0].documentId,
         MachineLearningPatent: data.MachineLearningPatent,
-        ActiveLearningPatent:data.ActiveLearningPatent
+        Hardware:data.Hardware,
+        EVO:data.EVO,
+        Speech:data.Speech,
+        Vision:data.Vision,
+        NLP:data.NLP,
+        Planning:data.Planning,
+        KnowledgeProcessing:data.KnowledgeProcessing,
       }
     })
     .then(response=>{
@@ -32,7 +38,7 @@ const PatentForm = (props) => {
       <Form className="container mt-5" method="POST" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a Machine Learning Patent?</Form.Label>
-          <Form.Control name ="MachineLearningPatent" as="select" size="sm" ref={register}>
+          <Form.Control name ="MachineLearningPatent" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option>No</option>
             
@@ -40,10 +46,58 @@ const PatentForm = (props) => {
         </Form.Group>
 
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
-          <Form.Label>Is this a Active Learning Patent?</Form.Label>
-          <Form.Control name ="ActiveLearningPatent" as="select" size="sm" ref={register}>
+          <Form.Label>Is this a AI hardware Patent?</Form.Label>
+          <Form.Control name ="Hardware" as="select" size="sm" ref={register} defaultValue="No">
+            <option>Yes</option>
+            <option >No</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+          <Form.Label>Is this a Evolutionary computation Patent?</Form.Label>
+          <Form.Control name ="EVO" as="select" size="sm" ref={register} defaultValue="No">
+            <option>Yes</option>
+            <option >No</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+          <Form.Label>Is this a Natural Language Processing Patent?</Form.Label>
+          <Form.Control name ="NLP" as="select" size="sm" ref={register} defaultValue="No">
+            <option>Yes</option>
+            <option >No</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+          <Form.Label>Is this a Speech Patent?</Form.Label>
+          <Form.Control name ="Speech" as="select" size="sm" ref={register} defaultValue="No">
+            <option>Yes</option>
+            <option  >No</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+          <Form.Label>Is this a Vision Patent?</Form.Label>
+          <Form.Control name ="Vision" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option>No</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+          <Form.Label>Is this a Knowledge Processing Patent?</Form.Label>
+          <Form.Control name ="KnowledgeProcessing" as="select" size="sm" ref={register} defaultValue="No">
+            <option>Yes</option>
+            <option >No</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+          <Form.Label>Is this a Planning/Control Patent?</Form.Label>
+          <Form.Control name ="Planning" as="select" size="sm" ref={register} defaultValue="No">
+            <option>Yes</option>
+            <option  >No</option>
           </Form.Control>
         </Form.Group>
 
