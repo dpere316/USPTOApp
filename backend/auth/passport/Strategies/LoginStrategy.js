@@ -23,9 +23,9 @@ const LoginStrategy = new Strategy({ usernameField: 'email' },
             return done('No User Found', null);
         }
 
-        const validatePassword = bcrypt.compareSync(password, user.password);
+        const isPasswordValid = bcrypt.compareSync(password, user.password);
 
-        if(!validatePassword)
+        if(!isPasswordValid)
         {
             return done("Email or Password Incorrect", null);
         }

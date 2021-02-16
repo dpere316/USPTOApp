@@ -16,9 +16,8 @@ router.post("/Login", function (req, res, next) {
   passport.authenticate("local-login", function (error, user, info) {
 
     if (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: error || "Oops something happened",
-        error: error.message || "Internal server error"
       });
     }
     
@@ -47,7 +46,7 @@ router.post("/register", function (req, res, next) {
   passport.authenticate("local-signup", function (error, user, info) {
     
     if (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: error || "Oops something happened",
       });
     }
