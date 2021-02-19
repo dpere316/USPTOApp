@@ -6,6 +6,8 @@ backend/node_modules
 .env
 /.pnp
 .pnp.js
+*.csv
+.ipynb*
 
 # testing
 /coverage
