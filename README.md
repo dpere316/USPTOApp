@@ -1,17 +1,5 @@
-# USPTOApp
-Data Labeling by Active Learning
+# USPTOApp - ML Notebooks
 
-Get Started:
-* Install [Node](https://nodejs.org/en/download/)
-  * npm is automatically installed with Node
-  * check by running ```npm -v``` on Terminal
-* Install [MongoDB](https://docs.mongodb.com/manual/installation/)
-* Install Nodemon 
-   -```npm install -g nodemon```
+All the notebooks used while researching ML for the project as well as different parsed data as well
 
-On the Terminal:
-* cd /USPTOApp/frontend
-  * ```npm install```
-
-* cd /USPTOApp/backend
-  * ```npm install```
+Only use this branch as reference or for visual representation of DATA
