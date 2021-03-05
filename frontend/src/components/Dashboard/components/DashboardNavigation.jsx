@@ -9,9 +9,9 @@ const DashboardNavigation = () => {
           DashBoard V3
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/Dashboard/ViewUser">
+              {/* <Link className="nav-link" to="/Dashboard/ViewUser">
                 View Users <span className="sr-only">(current)</span>{" "}
-              </Link>
+              </Link> */}
             </li>
 
             {/* <li className="nav-item">
