@@ -27,11 +27,15 @@ const PatentForm = (props) => {
     })
     .then(response=>{
       console.log("Data: ", response.data)
+      window.location.reload();
     })
     .catch(error => {
       console.log("Error: ", error.data )
     })
   }
+  const nextPage = ()=>{
+    window.location.reload();
+ }
 
   return (
     <div>
@@ -100,17 +104,16 @@ const PatentForm = (props) => {
             <option  >No</option>
           </Form.Control>
         </Form.Group>
-
-        <Button type="submit" variant="primary" size="lg">
+        <div className="row justify-content-between"> 
+        <Button type="submit" variant="primary" size="lg" className="col-3">
           {" "}
           Submit
         </Button>
-        <div className="d-flex justify-content-end">
-          <Button variant="primary" size="lg" className="mr-3" handleclick={""}>
+        <Button variant="primary" size="lg" className="col-3" onClick={nextPage}>
             {" "}
             Next
           </Button>
-        </div>
+          </div>
       </Form>
     </div>
   );

@@ -36,15 +36,19 @@ const PatentView = (props) => {
   }, []);
   
   return (
+    <div className="container-fluid mt-5">
+
     <div className="row">
-    
-      <div className="col">
+
+      <div className="col-sm-2 col-lg-6 col-md-6">
         <PatentCard patents={patents} />
       </div>
 
-      <div className="col">
+      <div className="col-sm-2 col-lg-6 col-md-6">
         <PatentForm patents={patents}/>
       </div>
+
+    </div>
 
     </div>
   );
