@@ -31,8 +31,8 @@ try:
     print("Model Successfully loaded")
 except FileNotFoundError:
     print("File not Found, creating a base model")
-    learner = base_model_creator(client, stopwords)
-    
+    base_model_creator(client, stopwords)
+    base_estimator = model_loader()
 
 if learner is None:
     learner = ActiveLearner(
@@ -48,46 +48,66 @@ entries = 0
 ids = []
 target = []
 try:
+    continue_after = None
     try:
-        continue_after = load('continue_token.joblib')
+        continue_starter = load('continue_token.joblib')
+        continue_after = continue_starter
     except FileNotFoundError:
         print('no token found')
         continue_after = None
         
     if not continue_after:
-        with cluster.watch() as stream:
-            while stream.alive:
-                change = stream.next()
-                if change is not None:
-                    entry = change['fullDocument']
-                    entries +=1
-                    ids.append(entry['document'])
-                    target.append(entry['MachineLearningPatent'])
-                    if entries > 3:
-                        continue_after = change['_id']
-                        break
-
-        X, y = to_learn(client, ids, target, stopwords)
-        learner.teach(X=X, y=y)
+        print('no Continue After')
+        continue_starter = load('continue_tester.joblib')
+        continue_after = continue_starter
         
-    
     with cluster.watch(resume_after=continue_after) as stream:
+        print("Listening...")
         while stream.alive:
             change = stream.next()
             if change is not None:
                 entry = change['fullDocument']
+                print(f'Entry:{entry}')
                 entries +=1
                 ids.append(entry['document'])
                 target.append(entry['MachineLearningPatent'])
-                    if entries > 3:
-                        X, y = to_learn(client, ids, target, stopwords)
-                        learner.teach(X=X, y=y)
-                        continue_after = change['_id']
-                        dump(contiune_after,'continue_token.joblib')
+                if entries > 7:
+                    continue_after = change['_id']
+                    X, y = to_learn(client, ids, target, stopwords)
+                    learner.teach(X=X, y=y)
+                    print("done with cycle")
+
+#         for idx in range(len(X)):
+#             query_idx, query_instance = learner.query(X)
+#             learner.teach(X[query_idx].reshape(1, -1), y[query_idx].reshape(1, -1))    
+#     with cluster.watch(resume_after=continue_after) as stream:
+#         print('Entering full loop with resume_after')
+#         while stream.alive:
+#             change = stream.next()
+#             if change is not None:
+#                 entry = change['fullDocument']
+#                 print(f'Entry:{entry}')
+#                 entries +=1
+#                 ids.append(entry['document'])
+#                 target.append(entry['MachineLearningPatent'])
+#                 if entries > 7:
+#                     print("Learning")
+#                     X, y = to_learn(client, ids, target, stopwords)
+#                     print("Teaching")
+# #                     for idx in range(len(X)):
+# #                         query_idx, query_instance = learner.query(X)
+# #                         learner.teach(X[query_idx].reshape(1, -1), y[query_idx].reshape(1, -1))
+#                     continue_after = change['_id']
+#                     dump(contiune_after,'continue_token.joblib')
+#                     entries = 0
+
                         
-                        
-except KeyBoardInterrupt:
+except KeyboardInterrupt:
     print("Interrupted")
+print("Finalizing ...")
+if continue_after is not continue_starter:
+    print("Dumping continue_after")
     dump(learner.estimator, f'models/Final/model_at_{time():0.0f}.joblib')
-print("Finalizing ... dumping continue_after")
-dump(contiune_after,'continue_token.joblib')
+    dump(continue_after,'continue_token.joblib')
+else:
+    print("No successful iterations... No changes will be made.")
