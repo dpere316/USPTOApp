@@ -71,11 +71,17 @@ try:
                 entries +=1
                 ids.append(entry['document'])
                 target.append(entry['MachineLearningPatent'])
-                if entries > 7:
+                if entries > 3:
                     continue_after = change['_id']
+                    print(ids)
+                    print(target)
                     X, y = to_learn(client, ids, target, stopwords)
+                    #sleep(5)
                     learner.teach(X=X, y=y)
                     print("done with cycle")
+                    entries = 0
+                    ids = []
+                    target = []
 
 #         for idx in range(len(X)):
 #             query_idx, query_instance = learner.query(X)
