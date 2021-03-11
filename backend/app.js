@@ -10,7 +10,6 @@ const passport = require('./auth/passport/index');
 const cookieSession = require('cookie-session');
 
 // Routes
-const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const patentsRouter = require('./routes/patents');
 
@@ -49,7 +48,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // MiddleWare // Here is where we let our application use the route that has been created
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/patents', patentsRouter);
 
