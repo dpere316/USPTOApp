@@ -20,7 +20,7 @@ try:
             stopwords.append(line[:-1])
 except FileNotFoundError:
     print('stopwords.txt not found, seeting stopwords="english"')
-    stopwords=english
+    stopwords='english'
 
 #create learner and check for base_learner
     
