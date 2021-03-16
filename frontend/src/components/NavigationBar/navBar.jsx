@@ -22,6 +22,10 @@ function displayLogout(AuthStatus) {
         <Nav.Link className="active" as={Link} to="/Home">
           Home
         </Nav.Link>
+        {/* {/this page needs to be edited so it only appears when admin is logged in/} */}
+        <Nav.Link as={Link} to="/AdminStats">
+          AdminStats
+        </Nav.Link>
         <Nav.Link as={Link} to="/Patents">
           Patents
         </Nav.Link>

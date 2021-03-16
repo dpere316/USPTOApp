@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 // Import Styles
 import './App.css';
+import AdminStats from './components/AdminStats/AdminStats';
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
         <Switch>
           <Redirect exact from="/" to="/Home" />
           <Route exact path="/Home" render ={Home}/>
+          <Route exact path="/AdminStats" render ={AdminStats}/>
           <Route path="/Signup" render={(props) => <SignUp {...props} />} />
           <Route path="/Login" render={(props) => <Login {...props} />} />
           <Route exact path="/Logout" render={(props) => <Logout {...props} />} />
