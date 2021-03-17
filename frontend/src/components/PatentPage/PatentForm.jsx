@@ -14,15 +14,16 @@ const PatentForm = (props) => {
       url:"/patents/labels", // route in backend
       method:"POST",
       data:{
-        documentId:props.patents[0].documentId,
-        MachineLearningPatent: data.MachineLearningPatent,
-        Hardware:data.Hardware,
-        EVO:data.EVO,
-        Speech:data.Speech,
-        Vision:data.Vision,
-        NLP:data.NLP,
-        Planning:data.Planning,
-        KnowledgeProcessing:data.KnowledgeProcessing,
+        document:props.patents[0].documentId,
+        mal:data.MachineLearningPatent,
+        hdw:data.Hardware,
+        evo:data.EVO,
+        spc:data.Speech,
+        vis:data.Vision,
+        nlp:data.NLP,
+        pln:data.Planning,
+        kpr:data.KnowledgeProcessing,
+        //user = get user email from cookies???
       }
     })
     .then(response=>{

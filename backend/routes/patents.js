@@ -23,15 +23,16 @@ router.get("/", async function (req, res, next) {
 
 router.post("/labels", async function (req, res, next) {
   const label = new Label({
-    document: req.body.documentId,
-    MachineLearningPatent: req.body.MachineLearningPatent,
-    Hardware:req.body.Hardware,
-    EVO:req.body.EVO,
-    Speech:req.body.Speech,
-    Vision:req.body.Vision,
-    NLP:req.body.NLP,
-    Planning:req.body.Planning,
-    KnowledgeProcessing:req.body.KnowledgeProcessing,
+    document:req.body.document,
+    //User:querydatabase for _id of entry related to {email},
+    mal:req.body.mal,
+    hdw:req.body.hdw,
+    evo:req.body.evo,
+    spc:req.body.spc,
+    vis:req.body.vis,
+    nlp:req.body.nlp,
+    pln:req.body.pln,
+    kpr:req.body.kpr,
   });
   label
     .save()
