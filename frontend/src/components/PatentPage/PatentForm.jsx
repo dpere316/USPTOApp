@@ -109,9 +109,9 @@ const PatentForm = (props) => {
           {" "}
           Submit
         </Button>
-        <Button variant="primary" size="lg" className="col-3" onClick={nextPage}>
+        <Button variant="danger" size="lg" className="col-3" onClick={nextPage}>
             {" "}
-            Next
+            Skip
           </Button>
           </div>
       </Form>

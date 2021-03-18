@@ -23,6 +23,7 @@ router.get("/", async function (req, res, next) {
 
 router.post("/labels", async function (req, res, next) {
   const label = new Label({
+    user:req.user._id,
     document: req.body.documentId,
     MachineLearningPatent: req.body.MachineLearningPatent,
     Hardware:req.body.Hardware,

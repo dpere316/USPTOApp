@@ -3,6 +3,7 @@ const { Schema, model } = require("mongoose");
 const labelSchema = new Schema(
   
   {
+    user:{ type: Schema.Types.ObjectId, ref: "User"},
     document:{ type:String},
     MachineLearningPatent:{type:String},
     Hardware:{type:String},
