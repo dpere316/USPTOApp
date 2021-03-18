@@ -24,7 +24,7 @@ router.get("/", async function (req, res, next) {
 router.post("/labels", async function (req, res, next) {
   const label = new Label({
     document:req.body.document,
-    //User:querydatabase for _id of entry related to {email},
+    user:req.user._id,
     mal:req.body.mal,
     hdw:req.body.hdw,
     evo:req.body.evo,
