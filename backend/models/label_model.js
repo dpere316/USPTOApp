@@ -4,7 +4,7 @@ const labelSchema = new Schema(
   
   {
     document:{ type:String},
-    User:{type: String, required: false},
+    user:{ type: Schema.Types.ObjectId, ref: "User"},
     mal:{type:String},
     hdw:{type:String},
     evo:{type:String},
