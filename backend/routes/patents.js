@@ -25,14 +25,14 @@ router.post("/labels", async function (req, res, next) {
   const label = new Label({
     user:req.user._id,
     document: req.body.documentId,
-    MachineLearningPatent: req.body.MachineLearningPatent,
-    Hardware:req.body.Hardware,
-    EVO:req.body.EVO,
-    Speech:req.body.Speech,
-    Vision:req.body.Vision,
-    NLP:req.body.NLP,
-    Planning:req.body.Planning,
-    KnowledgeProcessing:req.body.KnowledgeProcessing,
+    mal:req.body.mal, // Machine Learning
+    hdw:req.body.hdw, // Hardware
+    evo:req.body.evo, // Evolution
+    spc:req.body.spc, // speech
+    vis:req.body.vis, // Vision
+    nlp:req.body.nlp, // Natural Language Processing 
+    pln:req.body.pln, // Planning 
+    kpr:req.body.kpr, // Knowledge Processing
   });
   label
     .save()
