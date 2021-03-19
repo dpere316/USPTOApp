@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form} from "react-bootstrap";
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
@@ -15,14 +15,14 @@ const PatentForm = (props) => {
       method:"POST",
       data:{
         documentId:props.patents[0].documentId,
-        MachineLearningPatent: data.MachineLearningPatent,
-        Hardware:data.Hardware,
-        EVO:data.EVO,
-        Speech:data.Speech,
-        Vision:data.Vision,
-        NLP:data.NLP,
-        Planning:data.Planning,
-        KnowledgeProcessing:data.KnowledgeProcessing,
+        mal: data.mal,
+        hdw:data.hdw,
+        evo:data.evo,
+        spc:data.spc,
+        vis:data.vis,
+        nlp:data.nlp,
+        pln:data.pln,
+        kpr:data.kpr,
       }
     })
     .then(response=>{
@@ -39,19 +39,19 @@ const PatentForm = (props) => {
 
   return (
     <div>
+
       <Form className="container mt-5" method="POST" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a Machine Learning Patent?</Form.Label>
-          <Form.Control name ="MachineLearningPatent" as="select" size="sm" ref={register} defaultValue="No">
+          <Form.Control name ="mal" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option>No</option>
-            
           </Form.Control>
         </Form.Group>
 
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a AI hardware Patent?</Form.Label>
-          <Form.Control name ="Hardware" as="select" size="sm" ref={register} defaultValue="No">
+          <Form.Control name ="hdw" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option >No</option>
           </Form.Control>
@@ -59,7 +59,7 @@ const PatentForm = (props) => {
 
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a Evolutionary computation Patent?</Form.Label>
-          <Form.Control name ="EVO" as="select" size="sm" ref={register} defaultValue="No">
+          <Form.Control name ="evo" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option >No</option>
           </Form.Control>
@@ -67,7 +67,7 @@ const PatentForm = (props) => {
 
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a Natural Language Processing Patent?</Form.Label>
-          <Form.Control name ="NLP" as="select" size="sm" ref={register} defaultValue="No">
+          <Form.Control name ="nlp" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option >No</option>
           </Form.Control>
@@ -75,7 +75,7 @@ const PatentForm = (props) => {
 
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a Speech Patent?</Form.Label>
-          <Form.Control name ="Speech" as="select" size="sm" ref={register} defaultValue="No">
+          <Form.Control name ="spc" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option  >No</option>
           </Form.Control>
@@ -83,7 +83,7 @@ const PatentForm = (props) => {
 
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a Vision Patent?</Form.Label>
-          <Form.Control name ="Vision" as="select" size="sm" ref={register} defaultValue="No">
+          <Form.Control name ="vis" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option>No</option>
           </Form.Control>
@@ -91,7 +91,7 @@ const PatentForm = (props) => {
 
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a Knowledge Processing Patent?</Form.Label>
-          <Form.Control name ="KnowledgeProcessing" as="select" size="sm" ref={register} defaultValue="No">
+          <Form.Control name ="kpr" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option >No</option>
           </Form.Control>
@@ -99,7 +99,7 @@ const PatentForm = (props) => {
 
         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label>Is this a Planning/Control Patent?</Form.Label>
-          <Form.Control name ="Planning" as="select" size="sm" ref={register} defaultValue="No">
+          <Form.Control name ="pln" as="select" size="sm" ref={register} defaultValue="No">
             <option>Yes</option>
             <option  >No</option>
           </Form.Control>
@@ -109,9 +109,9 @@ const PatentForm = (props) => {
           {" "}
           Submit
         </Button>
-        <Button variant="primary" size="lg" className="col-3" onClick={nextPage}>
+        <Button variant="danger" size="lg" className="col-3" onClick={nextPage}>
             {" "}
-            Next
+            Skip
           </Button>
           </div>
       </Form>

@@ -3,16 +3,20 @@ const { Schema, model } = require("mongoose");
 const labelSchema = new Schema(
   
   {
+    user:{ type: Schema.Types.ObjectId, ref: "User"},
     document:{ type:String},
-    MachineLearningPatent:{type:String},
-    Hardware:{type:String},
-    EVO:{type:String},
-    Speech:{type:String},
-    Vision:{type:String},
-    NLP:{type:String},
-    Planning:{type:String},
-    KnowledgeProcessing:{type:String},
+    mal:{type:String},
+    hdw:{type:String},
+    evo:{type:String},
+    spc:{type:String},
+    vis:{type:String},
+    nlp:{type:String},
+    pln:{type:String},
+    kpr:{type:String},
   },
+  
+    {timestamps: true}
+  
 
 );
 
