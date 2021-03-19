@@ -9,16 +9,18 @@ const navBar = (props) => {
         <Navbar.Brand href="/">Patentify</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {displayLogout(props.isAuthed)}
+          {displayLogout(props.isAuthed, props.role)}
         </Navbar.Collapse>
       </Navbar>
     </div>
   );
 };
-function displayLogout(AuthStatus) {
+function displayLogout(AuthStatus, Role) {
   if (AuthStatus) {
-    return (
-      <Nav className="ml-auto">
+    if(Role === 'admin')
+    {
+      return (
+        <Nav className="ml-auto">
         <Nav.Link className="active" as={Link} to="/Home">
           Home
         </Nav.Link>
@@ -32,8 +34,27 @@ function displayLogout(AuthStatus) {
           Logout
         </Nav.Link>
       </Nav>
-    );
-  } else {
+      );
+    }
+    else if(Role === 'annotator')
+    {
+      return (
+        <Nav className="ml-auto">
+        <Nav.Link className="active" as={Link} to="/Home">
+          Home
+        </Nav.Link>
+        <Nav.Link as={Link} to="/Patents">
+          Patents
+        </Nav.Link>
+        <Nav.Link as={Link} to="/Logout">
+          Logout
+        </Nav.Link>
+      </Nav>
+      );
+    }
+    
+  } 
+  else {
     return (
       <Nav className="ml-auto">
       <Nav.Link className="active" as={Link} to="/Home">

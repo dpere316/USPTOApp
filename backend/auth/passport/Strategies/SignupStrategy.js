@@ -26,7 +26,7 @@ const SignupStrategy = new Strategy({passReqToCallback: true, usernameField: 'em
         let newUser = new User({
             name:req.body.name,
             email,
-            password:encryptPassword
+            password:encryptPassword,
         });
         
         newUser.save((error, inserted) => {

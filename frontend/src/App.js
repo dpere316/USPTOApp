@@ -21,21 +21,30 @@ const App = () => {
   
   // Set this into state using react hooks
   const [Auth] = useState(window.localStorage.getItem("isAuthenticated"))
-  
+  const [Role] = useState(window.localStorage.getItem("role"))
+
   // const ISAUTHENTICATED = window.localStorage.getItem("isAuthenticated");
 
   return (
     <div>
-        <Navbar isAuthed = {Auth}/>
+        <Navbar isAuthed={Auth} role={Role}/>
+        
         <Switch>
           <Redirect exact from="/" to="/Home" />
           <Route exact path="/Home" render ={Home}/>
           <Route path="/Signup" render={(props) => <SignUp {...props} />} />
           <Route path="/Login" render={(props) => <Login {...props} />} />
           <Route exact path="/Logout" render={(props) => <Logout {...props} />} />
-          <ProtectedRoute exact path="/Patents"   isAuthed = {Auth} component = {ViewPatent}/> 
-          <ProtectedRoute exact path='/dashboard' isAuthed = {Auth} component= {DashBoard} />
-          <ProtectedRoute exact path="/Dashboard/ViewUser" isAuthed = {Auth} component={ViewUser} />
+          <ProtectedRoute exact path="/Patents"   isAuthed = {Auth}  component = {ViewPatent}/> 
+
+          {/* Only Admins can acess the pages below */}
+
+          {Role === "admin" ? 
+          (<ProtectedRoute exact path='/Dashboard' isAuthed = {Auth}  component= {DashBoard} /> ) : (<Redirect to="/" />)}
+
+          {Role === "admin" ? 
+          (<ProtectedRoute exact path="/Dashboard/ViewUser" isAuthed = {Auth} component={ViewUser} /> ) : (<Redirect to="/" />)}
+          
         </Switch>
       </div>
   );
