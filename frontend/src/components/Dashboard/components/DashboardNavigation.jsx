@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const DashboardNavigation = () => {
   return (
@@ -9,11 +9,15 @@ const DashboardNavigation = () => {
           DashBoard V3
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item">
-              {/* <Link className="nav-link" to="/Dashboard/ViewUser">
-                View Users <span className="sr-only">(current)</span>{" "}
-              </Link> */}
+            <Link className="nav-link" to="/Dashboard/Table">
+                Table <span className="sr-only">(current)</span>{" "}
+              </Link>
             </li>
-
+            <li className="nav-item">
+            <Link className="nav-link" to="/Dashboard/ViewUser">
+                View Users <span className="sr-only">(current)</span>{" "}
+              </Link>
+            </li>
             {/* <li className="nav-item">
           <Link className="nav-link" to="/Dashboard/AddUser">
             Add User 

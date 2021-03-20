@@ -1,71 +1,48 @@
-import React from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import Nav from "../components/DashboardNavigation";
+
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 const ViewUser = () => {
 
-  const onSubmit = (data) => {
-    // This is using axios to make a post request to our backend and send {name,email,password}
-    // and store it in mongoDB
+  const [rowData, setRowData] = useState();
 
-    axios({
-      url: "/users/getuser", // route in backend
-      method: "GET",
-      data: {
-        data
-      },
-    })
-      .then((response) => {
-        console.log(data)
-      })
-      .catch((error) => {
-        console.log("Error: ", error.data);
-      });
-  };
+useEffect(() => {
+  async function fetchData() {
+    try {
+      
+      // we are using fetch to call the backend endpoint that contains all 368 patents.
+      const response = await fetch("/users");
 
-  const displayUsers = () => {
-    return (
-      <tr>
-        <td></td>
-      </tr>
-    );
-  };
+      const body = await response.json();
+      // body is an object with the response 
 
-  return (
-    <div className="container-fluid mt-5">
-      <div className="row">
-        <div className="col">
-          <div className="card">
-            {/* Card header */}
-            <div className="card-header border-0">
-              <h3 className="mb-0">Users</h3>
-            </div>
-            {/* Light table */}
-            <div className="table-responsive">
-              <table className="table align-items-center table-flush">
-                <thead className="thead-light">
-                  <tr>
-                    <th scope="col" className="sort" data-sort="email">
-                      Email
-                    </th>
-                    <th scope="col" className="sort" data-sort="name">
-                      Name
-                    </th>
-                    <th scope="col" className="sort" data-sort="status">
-                      Role
-                    </th>
-                    <th scope="col" className="sort" data-sort="completion">
-                      Remove
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="list">{onSubmit()}</tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      setRowData(body);
+
+    } catch (error) {}
+  }
+
+  fetchData();
+}, []);
+
+const onFirstDataRendered = (params) => {
+  params.api.sizeColumnsToFit();
+};
+
+return (
+  <div>
+    <Nav />
+    <div className="ag-theme-alpine container-fluid mt-5" style={{width:'100vw', height:'100vh'}}>
+        <AgGridReact rowData={rowData} rowSelection="multiple"     onFirstDataRendered={onFirstDataRendered}>
+           <AgGridColumn field="_id" sortable={ true } filter={ true }></AgGridColumn>
+            <AgGridColumn field="name" sortable={ true } filter={ true }></AgGridColumn>
+            <AgGridColumn field="email" sortable={ true } filter={ true }></AgGridColumn>
+        </AgGridReact>
     </div>
-  );
+  </div>
+);
 };
 
 export default ViewUser;
