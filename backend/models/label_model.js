@@ -15,8 +15,7 @@ const labelSchema = new Schema(
     kpr:{type:String},
   },
   
-    {timestamps: true,
-    }
+    {timestamps: true}
   
 
 );
