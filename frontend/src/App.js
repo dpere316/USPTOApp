@@ -12,7 +12,7 @@ import Login from './components/Login/Login';
 import ViewUser from './components/Dashboard/Pages/viewUser';
 import Logout from './components/Logout/Logout';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import Table from './components/Dashboard/Pages/Table';
+import Labels from './components/Dashboard/Pages/Labels';
 
 // Import Styles
 import './App.css';
@@ -47,7 +47,7 @@ const App = () => {
           (<ProtectedRoute exact path="/Dashboard/ViewUser" isAuthed = {Auth} component={ViewUser} /> ) : (<Redirect to="/" />)}
 
           {Role === "admin" ? 
-          (<ProtectedRoute exact path="/Dashboard/Table" isAuthed = {Auth} component={Table} /> ) : (<Redirect to="/" />)}
+          (<ProtectedRoute exact path="/Dashboard/ViewLabel" isAuthed = {Auth} component={Labels} /> ) : (<Redirect to="/" />)}
           
         </Switch>
       </div>
