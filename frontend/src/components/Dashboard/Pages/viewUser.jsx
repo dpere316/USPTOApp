@@ -1,68 +1,44 @@
-import React from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import Nav from "../components/DashboardNavigation";
+import MaterialTable from "material-table";
 
 const ViewUser = () => {
+  const [rowData, setRowData] = useState([]);
 
-  const onSubmit = (data) => {
-    // This is using axios to make a post request to our backend and send {name,email,password}
-    // and store it in mongoDB
+  const COLUMNS = [
+    { title: "ID", field: "_id" },
+    { title: "Name", field: "name" },
+    { title: "Email", field: "email" },
+  ];
 
-    axios({
-      url: "/users/getuser", // route in backend
-      method: "GET",
-      data: {
-        data
-      },
-    })
-      .then((response) => {
-        console.log(data)
-      })
-      .catch((error) => {
-        console.log("Error: ", error.data);
-      });
-  };
+  console.log(rowData);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // we are using fetch to call the backend endpoint that contains all 368 patents.
+        const response = await fetch("/users");
 
-  const displayUsers = () => {
-    return (
-      <tr>
-        <td></td>
-      </tr>
-    );
-  };
+        const body = await response.json();
+        // body is an object with the response
+
+        setRowData(body);
+      } catch (error) {}
+    }
+
+    fetchData();
+  }, []);
 
   return (
-    <div className="container-fluid mt-5">
-      <div className="row">
-        <div className="col">
-          <div className="card">
-            {/* Card header */}
-            <div className="card-header border-0">
-              <h3 className="mb-0">Users</h3>
-            </div>
-            {/* Light table */}
-            <div className="table-responsive">
-              <table className="table align-items-center table-flush">
-                <thead className="thead-light">
-                  <tr>
-                    <th scope="col" className="sort" data-sort="email">
-                      Email
-                    </th>
-                    <th scope="col" className="sort" data-sort="name">
-                      Name
-                    </th>
-                    <th scope="col" className="sort" data-sort="status">
-                      Role
-                    </th>
-                    <th scope="col" className="sort" data-sort="completion">
-                      Remove
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="list">{onSubmit()}</tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+    <div>
+      <Nav />
+      <div className="container-fluid mt-5">
+        <MaterialTable
+          title="Users"
+          columns={COLUMNS}
+          data={rowData}
+          isLoading={rowData.length === 0}
+          options={{ exportButton: true, exportAllData: true, pageSize: 15 }}
+        />
       </div>
     </div>
   );

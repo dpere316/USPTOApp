@@ -18,8 +18,7 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-// This route is sending a post to the DB with labeling information aswell as document id
-// Need to send userid
+// This route is sending a post to the DB with labeling information aswell as documentid and userid
 
 router.post("/labels", async function (req, res, next) {
   const label = new Label({
@@ -48,4 +47,12 @@ router.post("/labels", async function (req, res, next) {
     });
 });
 
+router.get("/labels", async function (req, res, next) {
+  try {
+    const labels = await Label.find()
+    res.json(labels);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 module.exports = router;

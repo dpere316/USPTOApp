@@ -30,7 +30,7 @@ function checkID(patents){
 
   if(patents !== undefined)
   {
-    console.log(patents)
+    // console.log(patents)
     
       const id = patents[0].documentId
     

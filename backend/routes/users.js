@@ -2,11 +2,17 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../auth/passport/index");
 
+const User = require("../models/User_model");
 
 /* GET users listing. */
 
-router.get("/getuser", function (req, res, next) {
-  
+router.get("/", async function (req, res, next) {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.json({ message: err });
+  }
 });
 
 // Login Handle
