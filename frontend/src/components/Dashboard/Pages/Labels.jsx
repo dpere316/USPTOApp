@@ -7,8 +7,8 @@ const Table = () => {
     const [rowData, setRowData] = useState([]);
 
     const COLUMNS = [ 
-      { title:'ID', field:'_id'},
-      { title:'Document', field:'document', defaultGroupOrder:0},
+      { title:'Label ID', field:'_id'},
+      { title:'Document ID', field:'document', defaultGroupOrder:0},
       { title:'User', field:'user'},
       { title:'Date', field:'createdAt'},
       { title:'Mal', field:'mal'},

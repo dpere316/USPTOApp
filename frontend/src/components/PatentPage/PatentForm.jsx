@@ -40,7 +40,7 @@ const PatentForm = (props) => {
   return (
     <div>
       <Form
-        className="container mt-5"
+        className="container-fluid mt-5"
         method="POST"
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -124,7 +124,7 @@ const PatentForm = (props) => {
           </div>
         </Form.Group>
 
-        <div className="row justify-content-around">
+        <div className="row justify-content-around mt-5">
           <Button type="submit" variant="primary" size="lg" className="col-3">
             {" "}
             Submit
