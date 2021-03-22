@@ -9,7 +9,7 @@ const Table = () => {
     const COLUMNS = [ 
       { title:'Label ID', field:'_id'},
       { title:'Document ID', field:'document', defaultGroupOrder:0},
-      { title:'User', field:'user'},
+      { title:'User', field:'user', defaultGroupOrder:1},
       { title:'Date', field:'createdAt'},
       { title:'Mal', field:'mal'},
       { title:'Hdw', field:'hdw'},
@@ -50,7 +50,10 @@ const Table = () => {
             columns={COLUMNS}
             data={rowData}
             isLoading={rowData.length === 0}
-            options={{ exportButton: true, exportAllData: true, grouping:true, pageSize:15}}
+            options={{ exportButton: true, exportAllData: true, grouping:true, pageSize:15,  selection: true}}
+            actions={[{
+              tooltip: 'Calculate InterAnnotator Agreement',
+              icon: 'group'}]}
           />
         </div>
       </div>
