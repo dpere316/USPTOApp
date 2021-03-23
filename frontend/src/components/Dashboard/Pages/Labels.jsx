@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../components/DashboardNavigation";
 import MaterialTable from "material-table";
+const Cohen = require('cohens-kappa');
 
 const Table = () => {
     
@@ -20,7 +21,7 @@ const Table = () => {
       { title:'Evo', field:'evo'},
       { title:'Kpr', field:'kpr'},
   ]
-
+  
     useEffect(() => {
       async function fetchData() {
         try {
@@ -32,15 +33,18 @@ const Table = () => {
           // body is an object with the response 
           
           setRowData(body);
+          
 
         } catch (error) {}
       }
   
       fetchData();
     }, []);
+
     
    
 
+   
     return (
       <div>
         <Nav />
@@ -50,16 +54,41 @@ const Table = () => {
             columns={COLUMNS}
             data={rowData}
             isLoading={rowData.length === 0}
-            options={{ exportButton: true, exportAllData: true, grouping:true, pageSize:15,  selection: true}}
-            actions={[{
-              tooltip: 'Calculate InterAnnotator Agreement',
-              icon: 'group'}]}
+            options={{
+              exportButton: true,
+              exportAllData: true,
+              grouping: true,
+              selection: true,
+            }}
+            actions={[
+              {
+                tooltip: "Calculate InterAnnotator Agreement",
+                icon: "group",
+                onClick: (event, rowData) => {
+                  function findKappa() {
+                    const categories = ["Yes", "No"];
+
+                    let rev3numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(rowData[0]) );
+                    let rev4numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(rowData[1]) );
+
+                    let kappaUnweighted = Cohen.kappa(
+                      rev3numeric,
+                      rev4numeric,
+                      2,
+                      "none"
+                    );
+                  
+                    alert("Unweighted kappa: " + kappaUnweighted);
+                    console.log(rev3numeric, rev4numeric)
+                  }
+                  findKappa();
+                },
+              },
+            ]}
           />
         </div>
       </div>
     );
 };
-
-
 
 export default Table;

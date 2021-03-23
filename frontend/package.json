@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "chart.js": "^2.9.4",
+    "cohens-kappa": "github:aaronnorby/cohens-kappa-JS",
     "material-table": "^1.69.2",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
