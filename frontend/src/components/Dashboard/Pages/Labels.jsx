@@ -68,26 +68,58 @@ const Table = () => {
 
                   function findKappa() {
 
+                 
+                    let testnumeric = []
+                    let test1 = [];
+                    let test2 = [];
+                    let currDoc, currUser;
+
+                    let arr1 = [];
+                    let arr2 = [];
+                    for (const row in Object.entries(rowData))
+                    {
+                      // for (cons)
+                      let p = rowData[row];
+                      currDoc = p.document;
+                      currUser = p.user;
+                       
+                      var curr = {'doc': currDoc, 'user':currUser};
+                      console.log(curr.doc);
+                      if(!test1.some(curr => curr.doc === currDoc)){
+                        arr1.push(p.mal, p.hdw ,p.evo ,p.spc ,p.vis, p.nlp ,p.pln, p.kpr)
+                        test1.push(curr);
+                      }
+                      else if(!test2.some(curr => curr.doc === currDoc))
+                      {
+                        arr2.push(p.mal, p.hdw ,p.evo ,p.spc ,p.vis, p.nlp ,p.pln, p.kpr)
+                        test2.push(curr);
+                      }
+                   
+                    }
+                    console.log(test1)
+                    console.log(test2)
+                    console.log(arr1)
+                    console.log(arr2)
+
+          
                     const categories = ["Yes", "No"];
 
-                    // let rev3numeric = []
+                    let rev1numeric = Cohen.nominalConversion(categories,arr1);
+                    let rev2numeric = Cohen.nominalConversion(categories,arr2);
+
                     // let rev3numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(...rowData) );
                     // let rev4numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(...rowData) );
 
-                    // let kappaUnweighted = Cohen.kappa(
-                    //   rev3numeric,
-                    //   rev4numeric,
-                    //   2,
-                    //   "none"
-                    // );
-                    
-                   let rev4numeric = (({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(...rowData);
-                    
-                 
+                    let kappaUnweighted = Cohen.kappa(
+                      rev1numeric,
+                      rev2numeric,
+                      2,
+                      "none"
+                    );
 
-                    // alert("Unweighted kappa: " + kappaUnweighted);
-                  
-                    console.log(rev4numeric)
+                    
+                    alert("Unweighted kappa: " + kappaUnweighted);
+                    
                   }
                   findKappa();
                 },
