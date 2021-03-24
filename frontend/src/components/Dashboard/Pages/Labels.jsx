@@ -65,21 +65,29 @@ const Table = () => {
                 tooltip: "Calculate InterAnnotator Agreement",
                 icon: "group",
                 onClick: (event, rowData) => {
+
                   function findKappa() {
+
                     const categories = ["Yes", "No"];
 
-                    let rev3numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(rowData[0]) );
-                    let rev4numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(rowData[1]) );
+                    // let rev3numeric = []
+                    // let rev3numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(...rowData) );
+                    // let rev4numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(...rowData) );
 
-                    let kappaUnweighted = Cohen.kappa(
-                      rev3numeric,
-                      rev4numeric,
-                      2,
-                      "none"
-                    );
+                    // let kappaUnweighted = Cohen.kappa(
+                    //   rev3numeric,
+                    //   rev4numeric,
+                    //   2,
+                    //   "none"
+                    // );
+                    
+                   let rev4numeric = (({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(...rowData);
+                    
+                 
+
+                    // alert("Unweighted kappa: " + kappaUnweighted);
                   
-                    alert("Unweighted kappa: " + kappaUnweighted);
-                    console.log(rev3numeric, rev4numeric)
+                    console.log(rev4numeric)
                   }
                   findKappa();
                 },
