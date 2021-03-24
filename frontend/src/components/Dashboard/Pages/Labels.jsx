@@ -66,49 +66,32 @@ const Table = () => {
                 icon: "group",
                 onClick: (event, rowData) => {
 
+                  function groupByKey(array, key) {
+                    return array.reduce((hash, obj) => {
+                      if (obj[key] === undefined) return hash;
+                      return Object.assign(hash, {
+                        [obj[key]]: (hash[obj[key]] || []).concat(obj),
+                      });
+                    }, {});
+                  }
+
                   function findKappa() {
 
-                 
-                    let testnumeric = []
-                    let test1 = [];
-                    let test2 = [];
-                    let currDoc, currUser;
-
-                    let arr1 = [];
-                    let arr2 = [];
-                    for (const row in Object.entries(rowData))
-                    {
-                      // for (cons)
-                      let p = rowData[row];
-                      currDoc = p.document;
-                      currUser = p.user;
-                       
-                      var curr = {'doc': currDoc, 'user':currUser};
-                      console.log(curr.doc);
-                      if(!test1.some(curr => curr.doc === currDoc)){
-                        arr1.push(p.mal, p.hdw ,p.evo ,p.spc ,p.vis, p.nlp ,p.pln, p.kpr)
-                        test1.push(curr);
-                      }
-                      else if(!test2.some(curr => curr.doc === currDoc))
-                      {
-                        arr2.push(p.mal, p.hdw ,p.evo ,p.spc ,p.vis, p.nlp ,p.pln, p.kpr)
-                        test2.push(curr);
-                      }
-                   
-                    }
-                    console.log(test1)
-                    console.log(test2)
-                    console.log(arr1)
-                    console.log(arr2)
-
-          
                     const categories = ["Yes", "No"];
 
-                    let rev1numeric = Cohen.nominalConversion(categories,arr1);
-                    let rev2numeric = Cohen.nominalConversion(categories,arr2);
+                    let group = groupByKey(rowData, 'user')
+                 
+                    let array = Object.keys(group).map((key) => group[key])
 
-                    // let rev3numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(...rowData) );
-                    // let rev4numeric = Cohen.nominalConversion(categories,(({  mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr }) => ({ mal, hdw ,evo ,spc ,vis, nlp ,pln, kpr}))(...rowData) );
+                    let user1 = array[0].map((x) => [x.mal, x.hdw ,x.evo ,x.spc ,x.vis, x.nlp ,x.pln, x.kpr]).flat()
+                    let user2 = array[1].map((x) => [x.mal, x.hdw ,x.evo ,x.spc ,x.vis, x.nlp ,x.pln, x.kpr]).flat()
+                
+                    console.log(user1, user2)
+
+                    
+                    let rev1numeric = Cohen.nominalConversion(categories,user1);
+                    let rev2numeric = Cohen.nominalConversion(categories,user2);
+
 
                     let kappaUnweighted = Cohen.kappa(
                       rev1numeric,
@@ -117,7 +100,6 @@ const Table = () => {
                       "none"
                     );
 
-                    
                     alert("Unweighted kappa: " + kappaUnweighted);
                     
                   }
