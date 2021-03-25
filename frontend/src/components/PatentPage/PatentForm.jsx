@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, FormCheck} from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 
+
 const PatentForm = (props) => {
-  const { register, handleSubmit } = useForm();
+
+  const { register, handleSubmit, formState: {isDirty} } = useForm();
 
   const onSubmit = (data) => {
     // This is using axios to make a post request to our backend and send {name,email,password}
@@ -36,6 +38,8 @@ const PatentForm = (props) => {
   const nextPage = () => {
     window.location.reload();
   };
+  
+  
 
   return (
     <div>
@@ -125,7 +129,7 @@ const PatentForm = (props) => {
         </Form.Group>
 
         <div className="row justify-content-around mt-5">
-          <Button type="submit" variant="primary" size="lg" className="col-3">
+          <Button disabled={!isDirty} type="submit" variant="primary" size="lg" className="col-3">
             {" "}
             Submit
           </Button>
