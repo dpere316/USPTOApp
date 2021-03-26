@@ -42,9 +42,6 @@ const Table = () => {
     }, []);
 
     
-   
-
-   
     return (
       <div>
         <Nav />
