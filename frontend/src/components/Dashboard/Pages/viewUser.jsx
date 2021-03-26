@@ -11,7 +11,8 @@ const ViewUser = () => {
     { title: "Email", field: "email" },
   ];
 
-  console.log(rowData);
+  // console.log(rowData);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -37,7 +38,7 @@ const ViewUser = () => {
           columns={COLUMNS}
           data={rowData}
           isLoading={rowData.length === 0}
-          options={{ exportButton: true, exportAllData: true, pageSize: 15 }}
+          options={{ exportButton: true, exportAllData: true}}
         />
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../components/DashboardNavigation";
 import MaterialTable from "material-table";
+const Cohen = require('cohens-kappa');
 
 const Table = () => {
     
@@ -20,7 +21,7 @@ const Table = () => {
       { title:'Evo', field:'evo'},
       { title:'Kpr', field:'kpr'},
   ]
-
+  
     useEffect(() => {
       async function fetchData() {
         try {
@@ -32,15 +33,15 @@ const Table = () => {
           // body is an object with the response 
           
           setRowData(body);
+          
 
         } catch (error) {}
       }
   
       fetchData();
     }, []);
-    
-   
 
+    
     return (
       <div>
         <Nav />
@@ -50,16 +51,63 @@ const Table = () => {
             columns={COLUMNS}
             data={rowData}
             isLoading={rowData.length === 0}
-            options={{ exportButton: true, exportAllData: true, grouping:true, pageSize:15,  selection: true}}
-            actions={[{
-              tooltip: 'Calculate InterAnnotator Agreement',
-              icon: 'group'}]}
+            options={{
+              exportButton: true,
+              exportAllData: true,
+              grouping: true,
+              selection: true,
+            }}
+            actions={[
+              {
+                tooltip: "Calculate InterAnnotator Agreement",
+                icon: "group",
+                onClick: (event, rowData) => {
+
+                  function groupByKey(array, key) {
+                    return array.reduce((hash, obj) => {
+                      if (obj[key] === undefined) return hash;
+                      return Object.assign(hash, {
+                        [obj[key]]: (hash[obj[key]] || []).concat(obj),
+                      });
+                    }, {});
+                  }
+
+                  function findKappa() {
+
+                    const categories = ["Yes", "No"];
+
+                    let group = groupByKey(rowData, 'user')
+                 
+                    let array = Object.keys(group).map((key) => group[key])
+
+                    let user1 = array[0].map((x) => [x.mal, x.hdw ,x.evo ,x.spc ,x.vis, x.nlp ,x.pln, x.kpr]).flat()
+                    let user2 = array[1].map((x) => [x.mal, x.hdw ,x.evo ,x.spc ,x.vis, x.nlp ,x.pln, x.kpr]).flat()
+                
+                    console.log(user1, user2)
+
+                    
+                    let rev1numeric = Cohen.nominalConversion(categories,user1);
+                    let rev2numeric = Cohen.nominalConversion(categories,user2);
+
+
+                    let kappaUnweighted = Cohen.kappa(
+                      rev1numeric,
+                      rev2numeric,
+                      2,
+                      "none"
+                    );
+
+                    alert("Unweighted kappa: " + kappaUnweighted);
+                    
+                  }
+                  findKappa();
+                },
+              },
+            ]}
           />
         </div>
       </div>
     );
 };
-
-
 
 export default Table;
